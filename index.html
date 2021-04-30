@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -32,7 +32,9 @@
 
         <div class="booking-content">
             <h1>Mega City Bus</h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.</p>
         </div>
 
 
@@ -42,18 +44,18 @@
             <div class="inputs">
                 <div class="input-group">
                     <label" for="">From</label>
-                    <input class="inp-style" type="text" name="" placeholder="Dhaka">
+                        <input class="inp-style" type="text" name="" placeholder="Dhaka">
                 </div>
                 <div class="input-group">
                     <label" for="">From</label>
-                    <input class="inp-style" type="text" name="" placeholder="Chittagone">
+                        <input class="inp-style" type="text" name="" placeholder="Chittagone">
                 </div>
             </div>
 
             <div class="inputs">
                 <div class="input-group">
                     <label" for="">Departure</label>
-                    <input class="inp-style" type="date" name="">
+                        <input class="inp-style" type="date" name="">
                 </div>
                 <div class="input-group">
                     <label for="">Return</label>
@@ -62,23 +64,23 @@
             </div>
             <div class="inputs">
                 <div class="input-group f-class">
-                <div>
-                    <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="number" name="">
-                </div>
-                <div>
-                    <button class="btn"><i class="fas fa-plus"></i></button>
-                    <button class="btn"><i class="fas fa-minus"></i></button> 
-                </div>
-            </div>
-                <div class="input-group f-class">
                     <div>
-                        <label for="">Economy ($100)</label>
-                        <input class="inp-style inp-width" type="number" name="">
+                        <label for="">AC ($150)</label>
+                        <input id="ac" class="inp-style inp-width" type="number" value="0" name="">
                     </div>
                     <div>
-                        <button class="btn"><i class="fas fa-plus"></i></button>
-                        <button class="btn"><i class="fas fa-minus"></i></button> 
+                        <button onclick="getPrice('ac',true)" class="btn"><i class="fas fa-plus"></i></button>
+                        <button onclick="getPrice('ac',false)" class="btn"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="input-group f-class">
+                    <div>
+                        <label for="">Non-AC ($100)</label>
+                        <input id="non-ac" class="inp-style inp-width" type="number" name="" value="0">
+                    </div>
+                    <div>
+                        <button  onclick="getPrice('non-ac',true)" class="btn"><i class="fas fa-plus"></i></button>
+                        <button onclick="getPrice('non-ac',false)" class="btn"><i class="fas fa-minus"></i></button>
                     </div>
                 </div>
 
@@ -89,7 +91,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p>$<span id="subtotal">00</span></p>
                     </div>
                 </div>
 
@@ -98,7 +100,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p>$<span id="tax">0</span></p>
                     </div>
                 </div>
                 <hr>
@@ -107,7 +109,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p>$<span id="total">00</span></p>
                     </div>
                 </div>
             </div>
@@ -116,6 +118,42 @@
     </main>
 
     <!--Thank You-->
+
+    <!-- javascript part -->
+    <script>
+        function getPrice(busType , isIncrease) {
+            totalTicket=ticketCount(busType)
+
+           if(isIncrease==true)
+           {
+            var totalTicket =totalTicket+ 1 
+
+           }
+           if(isIncrease==false && totalTicket>0)
+           {
+            var totalTicket=totalTicket-1
+           }
+
+           document.getElementById(busType).value=totalTicket;
+           totalPrice()
+        
+        }
+        function totalPrice(){
+            
+          var totalPrice=(ticketCount('ac')*150)+(ticketCount('non-ac')*100);
+          document.getElementById('subtotal').innerText=totalPrice
+          document.getElementById('tax').innerText=totalPrice*.1
+          document.getElementById('total').innerText=totalPrice+(totalPrice*.1)
+        }
+        function ticketCount(busType)
+        {
+            var totalTicket=  parseInt(document.getElementById(busType).value)
+           return  totalTicket
+          
+
+        }
+
+    </script>
 </body>
 
 </html>
