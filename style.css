@@ -112,6 +112,9 @@ nav ul li a:hover, a.active{
     font-weight: 500;
     background-color:  #52AF3A;
 }
+.btn-style:hover{
+    background-color: #378325;
+}
 .amount{
     display: flex;
     justify-content: space-between;
@@ -124,4 +127,20 @@ nav ul li a:hover, a.active{
     color: rgb(41, 70, 126);
     margin: 2px;
   
+}
+
+#successful-page{
+    display: none;
+    margin-top: 100px;
+    
+}
+.success-text, .success-icon  {
+    font-size: 30px;
+    text-align: center;
+    margin: 100px;
+    color: #52AF3A;
+    margin: 0px;
+}
+.success-icon{
+    font-size: 200px;
 }
